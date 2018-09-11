@@ -30,6 +30,7 @@ function normalizePort(val) {
 
 async function getPage(page) {
     var url = Config.urlHome + "&order=desc&page=" + page;
+    //var url = "https://stackoverflow.com/questions/6968448/where-is-body-in-a-nodejs-http-get-response"
     const options = {
         uri: url,
         transform: function (body) {
@@ -37,6 +38,16 @@ async function getPage(page) {
         }
     };
     const $ = await request(options);
-    console.log($);
-    return $;
+    var text = "";
+    $('.voz-post-message').each(function(i, element) {
+        var qoute = $(this).find(".voz-bbcode-quote");
+        if(qoute != undefined) {
+            text += "//" + removeSpec($(qoute).text());
+            $(this).find(".voz-bbcode-quote").remove();
+            text += "##" + removeSpec($(this).text());
+        } else {
+            text += "##" + removeSpec($(this).text());
+        }
+    });
+    return text;
 }
