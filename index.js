@@ -16,7 +16,7 @@ app.get('/f', async function (req, res) {
     res.send(body);
 })
 
-app.listen(port, () => console.log('Example app listening on port 3000!'))
+app.listen(port, () => console.log('Example app listening on port ' + port))
 
 function normalizePort(val) {
     var port = parseInt(val, 10);
