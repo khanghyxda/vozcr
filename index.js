@@ -8,6 +8,10 @@ const app = express();
 var port = normalizePort(process.env.PORT || '3000');
 
 app.get('/', async function (req, res) {
+    res.send("Hello");
+})
+
+app.get('/f', async function (req, res) {
     var body = await getPage(1);
     res.send(body);
 })
@@ -30,7 +34,7 @@ function normalizePort(val) {
 
 async function getPage(page) {
     var url = Config.urlHome + "&order=desc&page=" + page;
-    //var url = "https://stackoverflow.com/questions/6968448/where-is-body-in-a-nodejs-http-get-response"
+    url = "https://stackoverflow.com/questions/6968448/where-is-body-in-a-nodejs-http-get-response"
     const options = {
         uri: url,
         transform: function (body) {
@@ -49,5 +53,14 @@ async function getPage(page) {
             text += "##" + removeSpec($(this).text());
         }
     });
+    $('div').each(function(i, element) {
+        text += "##" + removeSpec($(this).text());
+    })
     return text;
+}
+
+function removeSpec(text){
+    return text.trim()
+    .replace(/\r?\n|\r/g,'')
+    .replace(/\t/g, '')
 }
