@@ -40,7 +40,7 @@ async function getPage(page) {
         uri: url,
         transform: function (body) {
             return cheerio.load(body);
-        }
+        },
     };
     const $ = await request(options);
     var text = "";
