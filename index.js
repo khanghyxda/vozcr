@@ -36,7 +36,6 @@ getPage(1).then(function(text) {console.log(text)});
 
 async function getPage(page) {
     var url = Config.urlHome + "&order=desc&page=" + page;
-    url = "https://stackoverflow.com/questions/6968448/where-is-body-in-a-nodejs-http-get-response"
     const options = {
         uri: url,
         transform: function (body) {
